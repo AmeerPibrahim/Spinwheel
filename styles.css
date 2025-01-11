@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik+Dirt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik+Dirt&family=Yesteryear&display=swap');
 
 #logo{
   margin: auto;
@@ -81,3 +81,63 @@ body {
   flex: 1;
 }
 
+dialog {
+  position: relative;
+  padding: 30px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 0px 30px rgba(255, 69, 0, 0.8);
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95); /* Slight opacity for effect */
+  backdrop-filter: blur(10px);
+  width: 400px;
+  animation: popupShow 0.5s ease-out, glowEffect 2s infinite; /* Animation */
+}
+
+dialog p {
+  margin: 0 0 20px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #ff4500; /* Glowing color */
+}
+
+dialog button {
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  color: white;
+  border:none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+dialog button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 15px #ff4500;
+}
+
+@keyframes popupShow {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowEffect {
+  0%, 100% {
+    box-shadow: 0px 0px 15px rgba(255, 69, 0, 0.8), 0px 0px 30px rgba(255, 69, 0, 0.6);
+  }
+  50% {
+    box-shadow: 0px 0px 25px rgba(255, 69, 0, 1), 0px 0px 50px rgba(255, 69, 0, 0.8);
+  }
+}
