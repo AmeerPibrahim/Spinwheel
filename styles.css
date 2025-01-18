@@ -1,43 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik+Dirt&family=Yesteryear&display=swap');
 
-#logo{
+#logo {
   margin: auto;
 }
 
 body {
   height: 100vh;
+  width: 100vw;
+  margin: 0;
   display: grid;
   place-items: center;
-  
   background: linear-gradient(to top, #ec303d, #ffffff);
+  overflow: hidden; /* Prevent scrolling */
 }
 
 #spin_the_wheel {
   display: inline-block;
   position: relative;
-  overflow: visible;
-  margin-bottom: auto;
-  margin-top: auto;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
 #wheel-container {
+  width: 80vmin; /* Proportional to the smaller viewport dimension */
+  height: 80vmin;
   position: relative;
   border-radius: 50%;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5); /* Shadow stays at the bottom */
 }
+
 #wheel {
   display: block;
-  
+  width: 100%;
+  height: 100%;
 }
 
 #spin {
   font-family: "Montserrat", serif;
-  font-optical-sizing: auto;
   font-weight: bold;
-  font-style: normal;
-  font-size: 5cap;
+  font-size: 4vmin; /* Scales dynamically */
   user-select: none;
   cursor: pointer;
   display: flex;
@@ -46,14 +46,12 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 30%;
-  height: 30%;
-  margin: -15%;
+  width: 20vmin; /* Scales proportionally */
+  height: 20vmin;
+  margin: -10vmin;
   background: #fff;
   color: #000000;
-  box-shadow:
-    0 0 0 8px currentColor,
-    0 0px 20px 5px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 0 8px currentColor, 0 0px 20px 5px rgba(0, 0, 0, 0.6);
   border-radius: 50%;
   transition: 0.8s;
 }
@@ -61,7 +59,7 @@ body {
 #spin::after {
   content: "";
   position: absolute;
-  top: -17px;
+  top: -10%;
   border: 10px solid transparent;
   border-bottom-color: currentColor;
   border-top: none;
@@ -83,35 +81,32 @@ body {
 
 dialog {
   position: relative;
-  padding: 30px;
+  padding: 5vmin; /* Adjust for smaller screens */
   border: none;
   border-radius: 15px;
   box-shadow: 0px 0px 30px rgba(255, 69, 0, 0.8);
   font-family: "Montserrat", serif;
-  font-optical-sizing: auto;
-  font-weight: bold;
-  font-style: normal;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.95); /* Slight opacity for effect */
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  width: 400px;
-  animation: popupShow 0.5s ease-out, glowEffect 2s infinite; /* Animation */
+  width: 50vmin; /* Scales with viewport */
+  max-width: 80%;
+  animation: popupShow 0.5s ease-out, glowEffect 2s infinite;
+  text-align: center;
 }
 
 dialog p {
-  margin: 0 0 20px;
-  font-size: 40px;
-  font-weight: bold;
-  color: #ff4500; /* Glowing color */
+  margin: 0 0 3vmin;
+  font-size: 3vmin; /* Scale text */
+  color: #ff4500;
 }
 
 dialog button {
-  padding: 12px 25px;
-  font-size: 16px;
+  padding: 1vmin 3vmin;
+  font-size: 2vmin;
   font-weight: bold;
   background: linear-gradient(45deg, #ff416c, #ff4b2b);
   color: white;
-  border:none;
+  border: none;
   border-radius: 25px;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
