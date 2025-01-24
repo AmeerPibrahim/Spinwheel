@@ -10,7 +10,7 @@ body {
   margin: 0;
   display: grid;
   place-items: center;
-  background:#fff; /* linear-gradient(to top, #ec303d, #ffffff); */
+  background: linear-gradient(to top, #ec303d, #ffffff);
   overflow: hidden; /* Prevent scrolling */
 }
 
@@ -26,6 +26,12 @@ body {
   position: relative;
   border-radius: 50%;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5); /* Shadow stays at the bottom */
+
+  /* Circular Border */
+  border: 25px solid rgba(255, 255, 255, 0.8); /* Orange border */
+
+  /* Glowing Effect */
+  animation: glowingBorder 2s infinite;
 }
 
 #wheel {
@@ -134,5 +140,13 @@ dialog button:hover {
   }
   50% {
     box-shadow: 0px 0px 25px rgba(255, 69, 0, 1), 0px 0px 50px rgba(255, 69, 0, 0.8);
+  }
+}
+@keyframes glowingBorder {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 69, 0, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 25px rgb(255, 0, 0), 0 0 50px rgba(255, 69, 0, 0.8);
   }
 }
