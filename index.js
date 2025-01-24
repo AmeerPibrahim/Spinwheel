@@ -1,15 +1,43 @@
 const sectors = [
-  { color: "#241e20", text: "#ffffff", label: "50   ", weight: 1  },
-  { color: "#ec303d", text: "#ffffff", label: "100   ", weight: 2 },
-  { color: "#241e20", text: "#ffffff", label: "150   ", weight: 30 },
-  { color: "#ec303d", text: "#ffffff", label: "200   ", weight: 40 },
-  { color: "#241e20", text: "#ffffff", label: "250   ", weight: 50 },
-  { color: "#ec303d", text: "#ffffff", label: "300   ", weight: 60 },
-  { color: "#241e20", text: "#ffffff", label: "350   ", weight: 70 },
-  { color: "#ec303d", text: "#ffffff", label: "400   ", weight: 80 },
-  { color: "#241e20", text: "#ffffff", label: "450   ", weight: 90 },
-  { color: "#ec303d", text: "#ffffff", label: "500   ", weight: 100 },
+  { color: "#241e20", text: "#ffffff", label: "1000", weight: 1000 },
+  { color: "#ec303d", text: "#ffffff", label: "950 ", weight: 900 },
+  { color: "#241e20", text: "#ffffff", label: "900 ", weight: 800 },
+  { color: "#ec303d", text: "#ffffff", label: "850 ", weight: 700 },
+  { color: "#241e20", text: "#ffffff", label: "800 ", weight: 600 },
+  { color: "#ec303d", text: "#ffffff", label: "750 ", weight: 500 },
+  { color: "#241e20", text: "#ffffff", label: "700 ", weight: 400 },
+  // Decreased weights for sectors 400 and above
+  { color: "#ec303d", text: "#ffffff", label: "650 ", weight: 300 },
+  { color: "#241e20", text: "#ffffff", label: "600 ", weight: 50 },
+  { color: "#ec303d", text: "#ffffff", label: "550 ", weight: 50 },
+  { color: "#241e20", text: "#ffffff", label: "500 ", weight: 50 },
+  { color: "#ec303d", text: "#ffffff", label: "450 ", weight: 50 },
+  { color: "#241e20", text: "#ffffff", label: "400 ", weight: 50 },
+  { color: "#ec303d", text: "#ffffff", label: "350 ", weight: 50 },
+  { color: "#241e20", text: "#ffffff", label: "300 ", weight: 50 },
+  { color: "#ec303d", text: "#ffffff", label: "250 ", weight: 50 },
+  { color: "#241e20", text: "#ffffff", label: "200 ", weight: 50 },
+  { color: "#ec303d", text: "#ffffff", label: "150 ", weight: 50 },
+  { color: "#241e20", text: "#ffffff", label: "100 ", weight: 50 },
+  { color: "#ec303d", text: "#ffffff", label: "50 ", weight: 50 }
 ];
+
+const totalWeight = sectors.reduce((sum, sector) => sum + sector.weight, 0);
+const cumulativeWeights = sectors.map(
+  ((sum) => (sector) => (sum += sector.weight))(0)
+);
+
+function weightedRandomSector() {
+  const rand = Math.random() * totalWeight;
+  for (let i = 0; i < cumulativeWeights.length; i++) {
+    if (rand < cumulativeWeights[i]) return i;
+  }
+  return 0; // Fallback (shouldn't happen)
+}
+
+console.log("Total Weight:", totalWeight); // Verify total weight
+console.log("Cumulative Weights:", cumulativeWeights); // Verify cumulative weights
+
 
 const events = {
   listeners: {},
@@ -42,20 +70,6 @@ let ang = 0; // Angle in radians
 let spinButtonClicked = false;
 
 const getIndex = () => Math.floor(tot - (ang / TAU) * tot) % tot;
-
-// Calculate cumulative weights
-const totalWeight = sectors.reduce((sum, sector) => sum + sector.weight, 0);
-const cumulativeWeights = sectors.map(
-  ((sum) => (sector) => (sum += sector.weight))(0)
-);
-
-function weightedRandomSector() {
-  const rand = Math.random() * totalWeight;
-  for (let i = 0; i < cumulativeWeights.length; i++) {
-    if (rand < cumulativeWeights[i]) return i;
-  }
-  return 0; // Fallback (shouldn't happen)
-}
 
 function drawSector(sector, i) {
   const ang = arc * i;
@@ -155,22 +169,22 @@ function triggerConfetti() {
   const centerY = popupRect.top + popupRect.height / 2;
 
   confetti({
-    particleCount: 700,  // Increase particle count for a bigger effect
-    spread: 700,  // Wider spread to cover more of the screen
-    startVelocity: 50,  // Higher start velocity for a more dramatic burst
+    particleCount: 1700,  // Increase particle count for a bigger effect
+    spread: 1700,  // Wider spread to cover more of the screen
+    startVelocity: 100,  // Higher start velocity for a more dramatic burst
     origin: { 
       x: centerX / window.innerWidth,  // Normalized to the screen width (0 to 1)
       y: centerY / window.innerHeight  // Normalized to the screen height (0 to 1)
     },
     angle: 90,  // Spread horizontally
     colors: [
-      '#ff4500', // Orange
-      '#ffbb33', // Yellow
-      '#4caf50', // Green
-      '#2196f3', // Blue
-      '#ff69b4', // Pink
-      '#f44336', // Red
-      '#8e44ad', // Purple
+      '#f1c40f', // Orange
+      '#ffffff', // Yellow
+      '#f1c40f', // Green
+      '#f1c40f', // Blue
+      '#ffffff', // Pink
+      '#f1c40f', // Red
+      '#f1c40f', // Purple
       '#f1c40f'  // Gold
     ],
     gravity: 1.5,  // Stronger downward pull for a dramatic fall
@@ -181,16 +195,15 @@ function triggerConfetti() {
   });
 }
 
-// Add spin end listener
 events.addListener("spinEnd", (sector) => {
   console.log(`Spin ended. You won: ${sector.label.trim()}`);
-  
+
   // Update popup text
   popupText.textContent = `You won ${sector.label.trim()}!`;
-  
+
   // Show the popup
   popup.showModal();
-  
+
   // Play win sound
   winSound.currentTime = 0;
   winSound.play();
@@ -198,6 +211,7 @@ events.addListener("spinEnd", (sector) => {
   // Trigger confetti
   triggerConfetti();
 });
+
 
 // Close popup on button click
 closePopupButton.addEventListener("click", () => {
